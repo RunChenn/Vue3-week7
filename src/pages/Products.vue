@@ -9,15 +9,12 @@ import Carts from '../components/Carts.vue';
 import Form from '../components/Form.vue';
 import ProdModal from '../components/ProdModal.vue';
 
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
-
 export default {
-  components: { Loading, ProdModal, ProdsTable, Carts, Form },
+  components: { ProdModal, ProdsTable, Carts, Form },
   name: 'Products',
   setup() {
     const isLoading = ref(false);
-    const fullPage = ref(true);
+    // const fullPage = ref(true);
 
     const products = ref([]);
     const product = ref({});
@@ -37,9 +34,6 @@ export default {
       });
 
       getProducts();
-      // getCart();
-
-      isLoading.value = false;
     });
 
     // 載入所有商品
@@ -48,7 +42,9 @@ export default {
         const prodsData = await api.products.getProductsAll();
 
         products.value = prodsData.products;
+        isLoading.value = false;
       } catch (err) {
+        isLoading.value = false;
         alert(err.message);
       }
     };
@@ -105,7 +101,7 @@ export default {
     return {
       // ...toRefs(form),
       isLoading,
-      fullPage,
+      // fullPage,
       products,
       product,
       cart,
@@ -120,25 +116,28 @@ export default {
 
 <template>
   <div class="container">
-    <div class="mt-4">
-      <!-- Loading -->
-      <Loading v-model:active="isLoading" :is-full-page="fullPage" />
-
-      <!-- 產品列表 -->
-      <ProdsTable
-        v-model:products="products"
-        v-model:loadingStatus="loadingStatus"
-        @get-product="getProduct"
-        @add-to-cart="addToCart"
-      />
-      <!-- @get-cart="getCart" -->
+    <div class="row py-1">
+      <div class="mt-4">
+        <!-- 產品列表 -->
+        <ProdsTable
+          v-model:products="products"
+          v-model:loadingStatus="loadingStatus"
+          @get-product="getProduct"
+          @add-to-cart="addToCart"
+        />
+        <!-- @get-cart="getCart" -->
+      </div>
     </div>
+
+    <!-- Loading -->
+    <Loading v-model:active="isLoading" :is-full-page="true" />
 
     <!-- Modal -->
     <ProdModal
       v-model:product="product"
       @add-to-cart="addToCart"
       v-model:loadingStatus="loadingStatus"
+    />
     />
   </div>
 </template>

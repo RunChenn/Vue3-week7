@@ -6,6 +6,10 @@ import { Modal } from 'bootstrap';
 
 export default {
   props: {
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
     product: {
       type: Object,
       default: () => ({

@@ -6,6 +6,7 @@ import order from './order';
 // admin
 import adminAuth from './admin/auth';
 import adminProducts from './admin/products';
+import adminOrder from './admin/order';
 
 export default {
   auth,
@@ -15,4 +16,5 @@ export default {
 
   adminAuth,
   adminProducts,
+  adminOrder,
 };

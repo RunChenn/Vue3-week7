@@ -7,19 +7,29 @@ import App from './App.vue';
 
 import './scss/custom.scss';
 
-import VueLoading from 'vue-loading-overlay';
+import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
 import 'jquery';
 import 'bootstrap';
 
 import veeValidate from './plugins/vee-validate';
+import { date, currency } from './plugins/filters';
 
 const app = createApp(App);
 
-// app.config.globalProperties.$axios = axios;
+app.config.globalProperties.$filters = {
+  date,
+  currency,
+};
 
-app.use(VueLoading);
+// app.provide('message', function () {
+//   console.log('來自全域的 provide');
+// });
+
+app.component('Loading', Loading);
+
+// app.use(Loading);
 app.use(veeValidate);
 
 app.use(router);

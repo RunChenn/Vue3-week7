@@ -5,15 +5,11 @@ import api from '../api/index.js';
 import Carts from '../components/Carts.vue';
 import Form from '../components/Form.vue';
 
-import Loading from 'vue-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
-
 export default {
-  components: { Loading, Carts, Form },
+  components: { Carts, Form },
   name: 'Products',
   setup() {
     const isLoading = ref(false);
-    const fullPage = ref(true);
 
     const cart = ref({});
 
@@ -25,8 +21,6 @@ export default {
       isLoading.value = true;
 
       getCart();
-
-      isLoading.value = false;
     });
 
     // 取得 購物車商品
@@ -35,8 +29,10 @@ export default {
         const res = await api.cart.getCart();
 
         cart.value = res.data;
+        isLoading.value = false;
       } catch (err) {
         alert(err.message);
+        isLoading.value = false;
       }
     };
 
@@ -130,7 +126,6 @@ export default {
 
     return {
       isLoading,
-      fullPage,
       cart,
       loadingStatus,
       getCart,
@@ -148,7 +143,7 @@ export default {
   <div class="container">
     <div class="mt-4">
       <!-- Loading -->
-      <Loading v-model:active="isLoading" :is-full-page="fullPage" />
+      <Loading v-model:active="isLoading" :is-full-page="true" />
 
       <!-- 購物車列表 -->
       <Carts
