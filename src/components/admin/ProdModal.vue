@@ -192,7 +192,7 @@ export default {
               <div v-if="Array.isArray(product.imagesUrl)">
                 <div
                   class="mb-1"
-                  v-for="(image, index) in product.imagesUrl"
+                  v-for="image in product.imagesUrl"
                   :key="`${image}index`"
                 >
                   <!-- <div class="mb-3">

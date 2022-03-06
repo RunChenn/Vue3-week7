@@ -3,6 +3,40 @@ import { Cookies } from '../utils/cookies';
 
 const routes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../pages/Login.vue'),
+    meta: {
+      layout: 'Login',
+      requiresAuth: false,
+    },
+  },
+  // 後台
+  {
+    path: '/admin',
+    component: () => import('../pages/admin/index.vue'),
+    children: [
+      {
+        path: 'products',
+        name: 'admin-Products',
+        component: () => import('../pages/admin/Products.vue'),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: 'orders',
+        name: 'admin-Orders',
+        component: () => import('../pages/admin/Orders.vue'),
+        meta: { requiresAuth: true },
+      },
+      {
+        path: 'coupons',
+        name: 'admin-Coupons',
+        component: () => import('../pages/admin/Coupons.vue'),
+        meta: { requiresAuth: true },
+      },
+    ],
+  },
+  {
     path: '/',
     name: 'Home',
     component: () => import('../pages/Home.vue'),
@@ -40,32 +74,8 @@ const routes = [
     ],
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../pages/Login.vue'),
-    meta: {
-      layout: 'Login',
-      requiresAuth: false,
-    },
-  },
-  // 後台
-  {
-    path: '/admin',
-    component: () => import('../pages/admin/index.vue'),
-    children: [
-      {
-        path: 'products',
-        name: 'admin-Products',
-        component: () => import('../pages/admin/Products.vue'),
-        meta: { requiresAuth: true },
-      },
-      {
-        path: 'orders',
-        name: 'admin-Orders',
-        component: () => import('../pages/admin/Orders.vue'),
-        meta: { requiresAuth: true },
-      },
-    ],
+    path: '/admin/:pathMatch(.*)*',
+    redirect: { name: 'Login' },
   },
 ];
 

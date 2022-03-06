@@ -1,8 +1,5 @@
 <script>
-// import modalMixin from '@/mixins/modalMixin';
-
-import { ref, onMounted, watch } from 'vue';
-import { Modal } from 'bootstrap';
+import { ref, watch } from 'vue';
 
 export default {
   props: {
@@ -17,15 +14,9 @@ export default {
   setup(props, { emit }) {
     const status = ref({});
 
-    const orderModal = ref(null);
-
     const tempOrder = ref({});
 
     const isPaid = ref(false);
-
-    onMounted(async () => {
-      console.log(props.tempOrder);
-    });
 
     watch(
       () => props.order,
@@ -37,7 +28,6 @@ export default {
 
     return {
       status,
-      orderModal,
       tempOrder,
       isPaid,
     };

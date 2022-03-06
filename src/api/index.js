@@ -7,6 +7,7 @@ import order from './order';
 import adminAuth from './admin/auth';
 import adminProducts from './admin/products';
 import adminOrder from './admin/order';
+import adminCoupon from './admin/coupon';
 
 export default {
   auth,
@@ -17,4 +18,5 @@ export default {
   adminAuth,
   adminProducts,
   adminOrder,
+  adminCoupon,
 };

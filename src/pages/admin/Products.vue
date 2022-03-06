@@ -19,7 +19,7 @@ export default {
     const isLoading = ref(false);
     const products = ref([]);
 
-    // const delModal = ref({});
+    const delModal = ref({});
 
     const pagination = ref({});
 
@@ -84,15 +84,20 @@ export default {
 
     // 刪除商品
     const delProduct = async () => {
+      isLoading.value = true;
+
       try {
         const res = await api.adminProducts.delProducts(product.value.id);
 
         alert(res.message);
 
+        isLoading.value = false;
+
         delModal.value.hide();
         getData();
       } catch (err) {
         alert(err.message);
+        isLoading.value = false;
       }
     };
 
