@@ -1,7 +1,4 @@
 <script>
-import { ref, onMounted } from 'vue';
-import { Modal } from 'bootstrap';
-
 export default {
   props: {
     item: {

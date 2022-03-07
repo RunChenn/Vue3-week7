@@ -1,8 +1,5 @@
 <script>
-import { ref, onMounted } from 'vue';
-import api from '../api/index.js';
-
-import { Modal } from 'bootstrap';
+import { ref } from 'vue';
 
 export default {
   props: {
@@ -36,7 +33,6 @@ export default {
   setup(props, { emit }) {
     const qty = ref(1);
 
-    console.log(props.product);
     return {
       qty,
     };

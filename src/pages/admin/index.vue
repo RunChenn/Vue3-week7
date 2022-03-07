@@ -1,12 +1,14 @@
 <script>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { Cookies, tokenName } from '../../utils/cookies.js';
 import api from '../../api/index.js';
+import Navbar from '../../components/Navbar.vue';
 
-// 驗證可以寫這邊
 export default {
   name: 'admin',
+  components: {
+    Navbar,
+  },
   setup() {
     const router = useRouter();
     const checkSuccess = ref(false);
@@ -41,14 +43,9 @@ export default {
 
 <template>
   <div>
-    <h1>你現在在後台頁面</h1>
-    <div id="nav">
-      <router-link to="/">回到前台</router-link> |
-      <router-link to="/admin/products">後台產品列表</router-link> |
-      <router-link to="/admin/orders">後台訂單</router-link> |
-      <router-link to="/admin/coupons">後台優惠券列表</router-link> |
-      <a href="#" @click.prevent="signout">登出</a>
+    <Navbar />
+    <div class="container-fluid mt-3 position-relative">
+      <router-view />
     </div>
-    <router-view v-if="checkSuccess"></router-view>
   </div>
 </template>

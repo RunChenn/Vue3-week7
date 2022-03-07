@@ -28,46 +28,13 @@ export default {
     let productModal = ref(null);
 
     onMounted(async () => {
-      productModal.value = new Modal(document.getElementById('productModal'), {
-        keyboard: false,
-      });
-    });
-
-    // 新增/編輯 商品
-    const updateProduct = async () => {
-      // 新增
-      if (props.isNew) {
-        try {
-          const res = await api.adminProducts.addProducts({
-            data: props.product,
-          });
-
-          alert(res.message);
-
-          productModal.value.hide();
-
-          emit('update');
-        } catch (err) {
-          alert(err.message);
+      productModal.value = new Modal(
+        document.getElementById('adminProductModal'),
+        {
+          keyboard: false,
         }
-        return;
-      }
-
-      // 編輯
-      try {
-        const res = await api.adminProducts.updateProducts(props.product.id, {
-          data: props.product,
-        });
-
-        alert(res.message);
-
-        productModal.value.hide();
-
-        emit('update');
-      } catch (err) {
-        alert(err.message);
-      }
-    };
+      );
+    });
 
     // 上傳圖片;
     const oneFileInput = ref(null);
@@ -114,7 +81,6 @@ export default {
     };
 
     return {
-      updateProduct,
       oneFileInput,
       fileInput,
       upload,
@@ -125,11 +91,11 @@ export default {
 
 <template>
   <div
-    id="productModal"
-    ref="productModal"
+    id="adminProductModal"
+    ref="adminProductModal"
     class="modal fade text-start"
     tabindex="-1"
-    aria-labelledby="productModalLabel"
+    aria-labelledby="adminProductModalLabel"
     aria-hidden="true"
     data-bs-backdrop="static"
     data-bs-keyboard="false"
@@ -137,7 +103,7 @@ export default {
     <div class="modal-dialog modal-dialog-scrollable modal-xl">
       <div class="modal-content border-0">
         <div class="modal-header bg-primary text-white">
-          <h5 id="productModalLabel" class="modal-title">
+          <h5 id="adminProductModalLabel" class="modal-title">
             <span v-if="isNew">新增產品</span>
             <span v-else>編輯產品</span>
           </h5>
@@ -384,7 +350,11 @@ export default {
           >
             取消
           </button>
-          <button type="button" class="btn btn-success" @click="updateProduct">
+          <button
+            type="button"
+            class="btn btn-success"
+            @click="$emit('update-product', product)"
+          >
             確認
           </button>
         </div>

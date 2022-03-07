@@ -3,9 +3,7 @@ import Pagination from '../../components/Pagination.vue';
 import CouponModal from '../../components/admin/CouponModal.vue';
 import DelModal from '../../components/admin/DelModal.vue';
 import api from '../../api/index.js';
-
 import { Modal } from 'bootstrap';
-
 import { ref, onMounted } from 'vue';
 
 export default {

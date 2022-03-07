@@ -21,15 +21,23 @@ export default {
 
     watch(
       () => props.coupon,
-      () => {
-        console.log(props.coupon);
-        tempCoupon.value = props.coupon;
+      (val) => {
+        console.log(val);
+        tempCoupon.value = val;
 
         // 將時間格式改為 YYYY-MM-DD
         const dateAndTime = new Date(tempCoupon.value.due_date * 1000)
           .toISOString()
           .split('T');
         [due_date.value] = dateAndTime;
+      }
+    );
+
+    watch(
+      () => due_date.value,
+      (val) => {
+        console.log(val);
+        tempCoupon.value.due_date = Math.floor(new Date(val) / 1000);
       }
     );
 

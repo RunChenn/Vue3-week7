@@ -17,8 +17,10 @@ export default {
   props: ['token'],
   setup() {
     const isLoading = ref(false);
+
     const products = ref([]);
 
+    const productModal = ref({});
     const delModal = ref({});
 
     const pagination = ref({});
@@ -28,6 +30,13 @@ export default {
     const product = ref({ imagesUrl: [], id: '' });
 
     onMounted(async () => {
+      productModal.value = new Modal(
+        document.getElementById('adminProductModal'),
+        {
+          keyboard: false,
+        }
+      );
+
       delModal.value = new Modal(document.getElementById('delModal'), {
         keyboard: false,
       });
@@ -61,10 +70,6 @@ export default {
       }
     };
 
-    // const prodsDetail = (item) => {
-    //   prodInfo.value = item;
-    // };
-
     const openModal = (status, item) => {
       isNew.value = status === 'new' ? true : false;
 
@@ -80,6 +85,42 @@ export default {
     const createImages = () => {
       product.value.imagesUrl = [];
       product.value.imagesUrl.push('');
+    };
+
+    // 新增/編輯 商品
+    const updateProduct = async () => {
+      // 新增
+      if (isNew.value) {
+        try {
+          const res = await api.adminProducts.addProducts({
+            data: product.value,
+          });
+
+          alert(res.message);
+
+          productModal.value.hide();
+
+          getData();
+        } catch (err) {
+          alert(err.message);
+        }
+        return;
+      }
+
+      // 編輯
+      try {
+        const res = await api.adminProducts.updateProducts(product.value.id, {
+          data: product.value,
+        });
+
+        alert(res.message);
+
+        productModal.value.hide();
+
+        getData();
+      } catch (err) {
+        alert(err.message);
+      }
     };
 
     // 刪除商品
@@ -110,6 +151,7 @@ export default {
       getData,
       openModal,
       createImages,
+      updateProduct,
       delProduct,
     };
   },
@@ -129,7 +171,7 @@ export default {
             class="btn btn-success"
             @click="openModal('new')"
             data-bs-toggle="modal"
-            data-bs-target="#productModal"
+            data-bs-target="#adminProductModal"
           >
             建立新的產品
           </button>
@@ -174,7 +216,7 @@ export default {
                 <button
                   type="button"
                   class="btn btn-outline-primary btn-sm me-2 mb-md-1"
-                  data-bs-target="#productModal"
+                  data-bs-target="#adminProductModal"
                   data-bs-toggle="modal"
                   @click="openModal('edit', item)"
                 >
@@ -202,7 +244,7 @@ export default {
     <ProdModal
       v-model:product="product"
       v-model:is-new="isNew"
-      @update="getData"
+      @updateProduct="updateProduct"
     />
     <!-- delModal -->
     <DelModal ref="delModal" v-model:item="product" @del-item="delProduct" />

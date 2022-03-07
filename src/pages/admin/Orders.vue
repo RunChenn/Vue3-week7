@@ -18,6 +18,9 @@ export default {
   setup() {
     const isLoading = ref(false);
 
+    const orderModal = ref({});
+    const delModal = ref({});
+
     const orders = ref({});
 
     const isNew = ref(false);
@@ -71,7 +74,6 @@ export default {
     };
 
     const openModal = (item) => {
-      console.log(item);
       isNew.value = false;
 
       tempOrder.value = { ...item };
