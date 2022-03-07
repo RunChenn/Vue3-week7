@@ -23,7 +23,7 @@ export default {
       () => props.coupon,
       () => {
         console.log(props.coupon);
-        tempOrder.value = props.coupon;
+        tempCoupon.value = props.coupon;
 
         // 將時間格式改為 YYYY-MM-DD
         const dateAndTime = new Date(tempCoupon.value.due_date * 1000)
@@ -128,7 +128,7 @@ export default {
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
-            Close
+            取消
           </button>
           <button
             type="button"

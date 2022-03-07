@@ -1,7 +1,7 @@
 <script>
 import Pagination from '../../components/Pagination.vue';
-import CouponModal from '../../components/admin/OrderModal.vue';
-import DelModal from '../../components/admin/OrderModal.vue';
+import CouponModal from '../../components/admin/CouponModal.vue';
+import DelModal from '../../components/admin/DelModal.vue';
 import api from '../../api/index.js';
 
 import { Modal } from 'bootstrap';
@@ -90,17 +90,17 @@ export default {
     };
 
     // 新增/編輯 商品
-    const updateCoupon = async (status, tempCoupon) => {
+    const updateCoupon = async () => {
       isLoading.value = true;
 
-      isNew.value = status === 'new' ? true : false;
-
-      let data = tempCoupon;
+      let data = tempCoupon.value;
 
       // 新增
       if (isNew.value) {
         try {
-          const res = await api.adminProducts.addProducts({ data });
+          const res = await api.adminCoupon.updateCoupon(tempCoupon.value.id, {
+            data,
+          });
 
           alert(res.message);
 
@@ -121,10 +121,9 @@ export default {
       try {
         data = tempCoupon.value;
 
-        const res = await api.adminProducts.updateProducts(
-          tempCoupon.value.id,
-          { data }
-        );
+        const res = await api.adminCoupon.updateCoupon(tempCoupon.value.id, {
+          data,
+        });
 
         alert(res.message);
 
@@ -139,7 +138,7 @@ export default {
 
     const delCoupon = async () => {
       try {
-        const res = await api.adminCoupon.delCoupon(tempOrder.value.id);
+        const res = await api.adminCoupon.delCoupon(tempCoupon.value.id);
 
         isLoading.value = false;
 
@@ -180,7 +179,7 @@ export default {
           <button
             type="button"
             class="btn btn-success"
-            @click="openCouponModal(true)"
+            @click="openCouponModal('new')"
             data-bs-toggle="modal"
             data-bs-target="#couponModal"
           >
@@ -215,7 +214,7 @@ export default {
                     type="button"
                     data-bs-target="#couponModal"
                     data-bs-toggle="modal"
-                    @click="openCouponModal(false, item)"
+                    @click="openCouponModal('edit', item)"
                   >
                     編輯
                   </button>
@@ -224,7 +223,7 @@ export default {
                     type="button"
                     data-bs-target="#delModal"
                     data-bs-toggle="modal"
-                    @click="openDelCouponModal(item)"
+                    @click="openCouponModal('delete', item)"
                   >
                     刪除
                   </button>
@@ -239,12 +238,12 @@ export default {
     <Pagination v-model:pages="pagination" @update-pages="getCoupons" />
 
     <CouponModal
-      :coupon="tempCoupon"
-      :is-new="isNew"
+      v-model:coupon="tempCoupon"
+      v-model:is-new="isNew"
       ref="couponModal"
       @update-coupon="updateCoupon"
     />
 
-    <DelModal :item="tempCoupon" ref="delModal" @del-item="delCoupon" />
+    <DelModal v-model:item="tempCoupon" ref="delModal" @del-item="delCoupon" />
   </div>
 </template>

@@ -11,6 +11,7 @@ export default {
   },
   // 編輯 優惠券資訊
   updateCoupon: (id, data) => {
+    console.log(data);
     return axiosInstance.put(`/api/${apiPath}/admin/coupon/${id}`, data);
   },
   // 刪除 優惠券資訊

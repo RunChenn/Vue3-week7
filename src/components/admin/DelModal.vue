@@ -9,15 +9,7 @@ export default {
       default: () => ({}),
     },
   },
-  setup(props, { emit }) {
-    const delModal = ref(null);
-
-    onMounted(async () => {
-      delModal.value = new Modal(document.getElementById('delModal'), {
-        keyboard: false,
-      });
-    });
-
+  setup() {
     return {};
   },
 };
