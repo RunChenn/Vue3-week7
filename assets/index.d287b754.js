@@ -1,0 +1,11 @@
+import{u as _,p as v,r as i,o as p,b as m,q as a,e,x as c,d as l,w as f,y as d}from"./vendor.299eaf2a.js";import{a as g}from"./index.5e0a01d2.js";import{_ as h}from"./index.3c8d949a.js";const x={name:"admin",setup(){const s=_();return{checkSuccess:v(!1),signout:async()=>{try{await g.auth.logout(),s.push({name:"Login"})}catch(t){alert(t.message)}}}}},w={class:"navbar navbar-expand-lg navbar-dark bg-primary"},$={class:"container-fluid"},N=a("a",{class:"navbar-brand text-secondary",href:"#"},"Navigant",-1),y=a("button",{class:"navbar-toggler",type:"button","data-bs-toggle":"collapse","data-bs-target":"#navbar","aria-controls":"navbar","aria-expanded":"false","aria-label":"Toggle navigation"},[a("span",{class:"navbar-toggler-icon"})],-1),C={class:"collapse navbar-collapse text-white",id:"navbar"},S={class:"navbar-nav"},V=d("\u7522\u54C1"),j=d("\u8A02\u55AE"),B=d("\u512A\u60E0\u5238");function T(s,o,u,t,b,k){const n=i("router-link");return p(),m("nav",w,[a("div",$,[N,y,a("div",C,[a("div",S,[e(n,{to:"/admin/products",class:"nav-link text-white"},{default:c(()=>[V]),_:1}),e(n,{to:"/admin/orders",class:"nav-link text-white"},{default:c(()=>[j]),_:1}),e(n,{to:"/admin/coupons",class:"nav-link text-white"},{default:c(()=>[B]),_:1}),l(' <router-link to="/admin/article" class="nav-link">\u8CBC\u6587</router-link> '),l(` <button
+            @click="logout"
+            class="nav-link text-white btn-link bg-primary"
+          >
+            \u767B\u51FA
+          </button> `),a("a",{href:"#",onClick:o[0]||(o[0]=f((...r)=>t.signout&&t.signout(...r),["prevent"])),class:"nav-link"},"\u767B\u51FA")]),l(` <div class="navbar-nav ms-auto">
+          <router-link to="/" class="nav-link text-white">\u524D\u53F0\u9801\u9762</router-link>
+          <router-link to="/cart" class="nav-link text-white"
+            >\u8CFC\u7269\u8ECA</router-link
+          >
+        </div> `)])])])}var q=h(x,[["render",T]]);const E={name:"admin",components:{Navbar:q},setup(){return _(),{checkSuccess:v(!1)}}},L={class:"container-fluid mt-3 position-relative"};function M(s,o,u,t,b,k){const n=i("Navbar"),r=i("router-view");return p(),m("div",null,[e(n),a("div",L,[e(r)])])}var D=h(E,[["render",M]]);export{D as default};
