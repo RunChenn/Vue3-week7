@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { defineRule, configure, ErrorMessage, Form, Field } from 'vee-validate';
 import { required, email, min, max } from '@vee-validate/rules';
 import { localize } from '@vee-validate/i18n';
