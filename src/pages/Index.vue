@@ -1,5 +1,5 @@
 <script>
-import { onBeforeMount } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import api from '../api/index.js';
 import { useRouter } from 'vue-router';
 
