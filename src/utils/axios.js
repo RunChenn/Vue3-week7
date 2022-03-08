@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Cookies } from './cookies.js';
+import router from '../router/index';
 
 const apiPath = import.meta.env.VITE_APP_PATH;
 
@@ -40,12 +41,13 @@ axiosInstance.interceptors.response.use(
         case 400:
           break;
         case 401:
-          // alert(err.response.data.message);
-          window.location.href = '/login';
+          // window.location.href = '/login';
+          router.push({ name: 'Login' });
           break;
         case 403:
-          // alert(err.response.data.message);
-          window.location.href = '/login';
+          // window.location.href = '/login';
+          router.push({ name: 'Login' });
+
           break;
         case 500:
           break;

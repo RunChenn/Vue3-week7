@@ -53,9 +53,13 @@ export default {
             >優惠券</router-link
           >
           <!-- <router-link to="/admin/article" class="nav-link">貼文</router-link> -->
-          <a href="#" @click.prevent="logout" class="nav-link text-white"
-            >登出</a
+          <!-- <button
+            @click="logout"
+            class="nav-link text-white btn-link bg-primary"
           >
+            登出
+          </button> -->
+          <a href="#" @click.prevent="signout" class="nav-link">登出</a>
         </div>
         <!-- <div class="navbar-nav ms-auto">
           <router-link to="/" class="nav-link text-white">前台頁面</router-link>
