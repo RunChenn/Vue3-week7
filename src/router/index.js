@@ -11,6 +11,10 @@ const routes = [
       requiresAuth: false,
     },
   },
+  {
+    path: '/',
+    component: () => import('../pages/index.vue'),
+  },
   // 後台
   {
     path: '/admin',
@@ -36,47 +40,47 @@ const routes = [
       },
     ],
   },
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('../pages/Home.vue'),
-    children: [
-      {
-        path: '',
-        name: 'Index',
-        component: () => import('../pages/Index.vue'),
-        meta: {
-          layout: 'index',
-          requiresAuth: false,
-        },
-      },
-      {
-        path: '/products',
-        name: 'Products',
-        component: () => import('../pages/Products.vue'),
-        meta: {
-          requiresAuth: false,
-        },
-      },
-      // {
-      //   path: '/product/:id',
-      //   name: '產品頁面',
-      //   component: () => import('../pages/Product.vue'),
-      // },
-      {
-        path: '/cart',
-        name: '購物車',
-        component: () => import('../pages/Cart.vue'),
-        meta: {
-          requiresAuth: false,
-        },
-      },
-    ],
-  },
-  {
-    path: '/admin/:pathMatch(.*)*',
-    redirect: { name: 'Login' },
-  },
+  // {
+  //   path: '/',
+  //   name: 'Home',
+  //   component: () => import('../pages/Home.vue'),
+  //   children: [
+  //     {
+  //       path: '',
+  //       name: 'Index',
+  //       component: () => import('../pages/Index.vue'),
+  //       meta: {
+  //         layout: 'index',
+  //         requiresAuth: false,
+  //       },
+  //     },
+  //     {
+  //       path: '/products',
+  //       name: 'Products',
+  //       component: () => import('../pages/Products.vue'),
+  //       meta: {
+  //         requiresAuth: false,
+  //       },
+  //     },
+  //     // {
+  //     //   path: '/product/:id',
+  //     //   name: '產品頁面',
+  //     //   component: () => import('../pages/Product.vue'),
+  //     // },
+  //     {
+  //       path: '/cart',
+  //       name: '購物車',
+  //       component: () => import('../pages/Cart.vue'),
+  //       meta: {
+  //         requiresAuth: false,
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: '/admin/:pathMatch(.*)*',
+  //   redirect: { name: 'Login' },
+  // },
 ];
 
 const router = createRouter({
@@ -86,23 +90,12 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // console.log(to);
-  // 如果 router 轉跳的頁面需要驗證 requiresAuth: true
-  // console.log('to=', to.fullPath, '| from=', from.fullPath);
-  // console.log(
-  //   to.matched.some((record) => {
-  //     console.log(record.name, record.meta.requiresAuth);
-  //     return record.meta.requiresAuth;
-  //   })
-  // );
   if (
     to.matched.some((record) => {
-      // console.log(record.name, record.meta.requiresAuth);
       return record.meta.requiresAuth;
     })
   ) {
     // 如果沒有 token
-    // console.log('token?', Cookies.getCookie());
     if (Cookies.getCookie() === '') {
       // 轉跳到 login page
       next({ name: 'Login' });

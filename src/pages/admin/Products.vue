@@ -41,17 +41,13 @@ export default {
         keyboard: false,
       });
 
-      isLoading.value = true;
-
       try {
         // 檢查權限
         await api.auth.checkAuth();
         getData();
-        isLoading.value = false;
       } catch (err) {
         console.log(err);
         alert(err.message);
-        isLoading.value = false;
       }
     });
 

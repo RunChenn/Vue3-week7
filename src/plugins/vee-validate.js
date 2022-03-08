@@ -11,10 +11,6 @@ defineRule('email', email);
 defineRule('min', min);
 defineRule('max', max);
 
-Vue.component('VForm', Form);
-Vue.component('VField', Field);
-Vue.component('ErrorMessage', ErrorMessage);
-
 export default {
   install(app) {
     app.component('VForm', Form);

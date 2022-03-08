@@ -13,29 +13,19 @@ export default {
     const router = useRouter();
     const checkSuccess = ref(false);
 
-    onMounted(async () => {
-      try {
-        // 檢查權限
-        await api.auth.checkAuth();
+    // onMounted(async () => {
+    //   try {
+    //     // 檢查權限
+    //     await api.auth.checkAuth();
 
-        checkSuccess.value = true;
-      } catch (err) {
-        alert(err.message);
-      }
-    });
-
-    const signout = async () => {
-      try {
-        await api.auth.logout();
-        router.push({ name: 'Login' });
-      } catch (err) {
-        alert(err.message);
-      }
-    };
+    //     checkSuccess.value = true;
+    //   } catch (err) {
+    //     alert(err.message);
+    //   }
+    // });
 
     return {
       checkSuccess,
-      signout,
     };
   },
 };

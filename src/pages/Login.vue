@@ -40,7 +40,7 @@ export default {
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
+      <h1 class="h3 my-3 font-weight-normal">Welcome! NAVIGANT</h1>
       <div class="col-8">
         <form id="form" class="form-signin" @submit.prevent="login">
           <div class="form-floating mb-3">

@@ -1,5 +1,5 @@
 <script>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import api from '../api/index.js';
 
@@ -8,17 +8,6 @@ export default {
   setup() {
     const router = useRouter();
     const checkSuccess = ref(false);
-
-    onMounted(async () => {
-      try {
-        // 檢查權限
-        await api.auth.checkAuth();
-
-        checkSuccess.value = true;
-      } catch (err) {
-        alert(err.message);
-      }
-    });
 
     const signout = async () => {
       try {
