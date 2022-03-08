@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { defineRule, configure, ErrorMessage, Form, Field } from 'vee-validate';
 import { required, email, min, max } from '@vee-validate/rules';
 import { localize } from '@vee-validate/i18n';
@@ -10,6 +11,10 @@ defineRule('required', required);
 defineRule('email', email);
 defineRule('min', min);
 defineRule('max', max);
+
+Vue.component('VForm', Form);
+Vue.component('VField', Field);
+Vue.component('ErrorMessage', ErrorMessage);
 
 export default {
   install(app) {
